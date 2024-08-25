@@ -1,11 +1,11 @@
 ---
-## Projetos de Desenvolvimento de Software
+## Desenvolvedor Full-Stack Criativo com Experiência em Aplicações Web e Plataforma de Ensino Interativa"
 
 ## Documentação da Calculadora
 
 ## Visão Geral
 
-A calculadora **Calc_igor-hilario** é uma aplicação web desenvolvida em HTML, CSS e JavaScript. Ela permite realizar operações matemáticas básicas e avançadas, como adição, subtração, multiplicação, divisão, raiz quadrada e exponenciação. Esta aplicação foi criada como parte de um projeto mais amplo, incluindo também o **Quis**, um projeto separado focado em questões matemáticas.
+A calculadora **Calc_igor-hilario** é uma aplicação web desenvolvida em HTML, CSS e JavaScript. Ela permite realizar operações matemáticas básicas e avançadas, como adição, subtração, multiplicação, divisão, raiz quadrada e exponenciação. Esta aplicação faz parte de um projeto mais amplo, que inclui também o **Quis**, uma plataforma para questões matemáticas.
 
 ## Funcionalidades
 
@@ -84,17 +84,105 @@ O design da calculadora inclui:
 
 ## Projeto Quis
 
-O **Quis** é um projeto separado focado em questões matemáticas. É uma plataforma onde os usuários podem responder a questões matemáticas de múltipla escolha, permitindo a prática e a validação do conhecimento matemático. Mais detalhes sobre o projeto Quis podem ser encontrados em sua própria documentação ou repositório.
+**Quis** é uma plataforma desenvolvida para a prática e validação de conhecimento matemático por meio de questões de múltipla escolha. A aplicação permite aos usuários responder a perguntas e verificar suas respostas, facilitando o aprendizado e o aprimoramento das habilidades matemáticas.
+
+### Funcionalidades do Quis
+
+- **Questões de Múltipla Escolha**: Usuários podem responder a uma variedade de questões matemáticas.
+- **Feedback Imediato**: Respostas corretas e incorretas são informadas imediatamente.
+- **Estatísticas de Desempenho**: Acompanhamento do desempenho do usuário com estatísticas e resultados.
+
+### Estrutura HTML do Quis
+
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Quis - Questões Matemáticas</title>
+<style>
+/* Estilos CSS aqui */
+</style>
+</head>
+<body>
+<div class="quiz-container">
+  <header>Quis - Questões Matemáticas</header>
+  <div id="question-container">
+    <!-- Pergunta será inserida aqui pelo JavaScript -->
+  </div>
+  <div id="options-container">
+    <!-- Opções de resposta serão inseridas aqui pelo JavaScript -->
+  </div>
+  <button id="next-button" onclick="loadNextQuestion()">Próxima</button>
+</div>
+
+<script>
+// Código JavaScript aqui
+</script>
+</body>
+</html>
+```
+
+### Exemplo de Código JavaScript
+
+```javascript
+const questions = [
+  {
+    question: "Qual é a raiz quadrada de 16?",
+    options: ["2", "4", "8", "16"],
+    answer: "4"
+  },
+  {
+    question: "Qual é o valor de 5^2?",
+    options: ["10", "20", "25", "30"],
+    answer: "25"
+  }
+];
+
+let currentQuestionIndex = 0;
+
+function loadNextQuestion() {
+  const questionContainer = document.getElementById('question-container');
+  const optionsContainer = document.getElementById('options-container');
+
+  const question = questions[currentQuestionIndex];
+  questionContainer.innerHTML = `<p>${question.question}</p>`;
+  
+  optionsContainer.innerHTML = '';
+  question.options.forEach(option => {
+    optionsContainer.innerHTML += `<button onclick="checkAnswer('${option}')">${option}</button>`;
+  });
+}
+
+function checkAnswer(selectedOption) {
+  const question = questions[currentQuestionIndex];
+  if (selectedOption === question.answer) {
+    alert("Resposta Correta!");
+  } else {
+    alert("Resposta Incorreta. Tente novamente.");
+  }
+  
+  currentQuestionIndex++;
+  if (currentQuestionIndex < questions.length) {
+    loadNextQuestion();
+  } else {
+    alert("Quiz concluído!");
+  }
+}
+
+// Carregar a primeira pergunta ao iniciar
+loadNextQuestion();
+```
 
 ## ODIS (Objetivos de Desenvolvimento e Implementação de Software)
 
-### ODIS da Calculadora
+### ODIS do Quis
 
-1. **Objetivo**: Desenvolver uma aplicação web simples que permita a realização de operações matemáticas básicas e avançadas.
-2. **Desenvolvimento**: Utilizar HTML, CSS e JavaScript para criar uma interface intuitiva e funcional.
-3. **Implementação**: Garantir que a calculadora seja responsiva e funcione corretamente em diferentes dispositivos e navegadores.
-4. **Suporte**: Manter a documentação atualizada e fornecer suporte para futuras atualizações e melhorias.
+1. **Objetivo**: Desenvolver uma plataforma interativa para questões matemáticas de múltipla escolha.
+2. **Desenvolvimento**: Utilizar HTML, CSS e JavaScript para criar uma interface amigável e funcional.
+3. **Implementação**: Garantir que a aplicação seja responsiva e funcione corretamente em diferentes dispositivos e navegadores.
+4. **Suporte**: Fornecer documentação e suporte para futuras atualizações e melhorias.
 
 ---
 
-Essa documentação agora inclui uma seção sobre o projeto **Quis** e detalha os **ODIS** relacionados ao desenvolvimento e implementação da calculadora. Se precisar de mais alguma coisa, é só avisar!
+Se precisar de mais detalhes ou ajustes, é só me avisar!
