@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Banco de Dados - Questionário</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7; /* Cor de fundo clara */
+    }
+
+    .question {
+      margin-bottom: 20px;
+      padding: 20px;
+      background-color: #fff; /* Cor de fundo branca */
+      border: 1px solid #ddd; /* Cor de borda cinza */
+      border-radius: 10px; /* Arredondamento das bordas */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra leve */
+    }
+
+    .question label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold; /* Negrito para os rótulos */
+      color: #333; /* Cor de texto escura */
+    }
+
+    .question input[type="radio"] {
+      margin-right: 10px;
+    }
+
+    .progress {
+      width: 300px;
+      height: 20px;
+      background-color: #ccc; /* Cor de fundo do gráfico */
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .progress-bar {
+      width: 0%;
+      height: 20px;
+      background-color: #4CAF50; /* Cor verde para o gráfico de progresso */
+      border-radius: 10px;
+      text-align: center;
+      color: #fff; /* Cor de texto branca */
+      padding: 5px;
+    }
+
+    /* Cores agradáveis para os botões */
+    button[type="submit"] {
+      background-color: #009688; /* Cor azul-verde */
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #00796B; /* Cor azul-verde mais escura */
+    }
+
+    .result {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Banco de Dados - Questionário</h1>
+  
+  <div class="progress">
+    <div class="progress-bar" id="progress-bar">0%</div>
+  </div>
+  
+  <form>
+    <div class="question">
+      <label for="q1">1. Qual é a função principal de uma chave primária em uma tabela de banco de dados?</label>
+      <input type="radio" name="q1" value="a" onclick="updateProgress(1)"> Armazenar dados temporários<br>
+      <input type="radio" name="q1" value="b" onclick="updateProgress(1)"> Garantir a unicidade dos registros<br>
+      <input type="radio" name="q1" value="c" onclick="updateProgress(1)"> Indexar dados para buscas rápidas<br>
+      <input type="radio" name="q1" value="d" onclick="updateProgress(1)"> Definir o tipo de dado das colunas
+    </div>
+    
+    <div class="question">
+      <label for="q2">2. Qual dos seguintes comandos SQL é usado para criar uma nova tabela?</label>
+      <input type="radio" name="q2" value="a" onclick="updateProgress(2)"> INSERT INTO<br>
+      <input type="radio" name="q2" value="b" onclick="updateProgress(2)"> CREATE TABLE<br>
+      <input type="radio" name="q2" value="c" onclick="updateProgress(2)"> UPDATE TABLE<br>
+      <input type="radio" name="q2" value="d" onclick="updateProgress(2)"> DELETE FROM
+    </div>
+    
+    <div class="question">
+      <label for="q3">3. Qual é o propósito de uma chave estrangeira em uma tabela de banco de dados?</label>
+      <input type="radio" name="q3" value="a" onclick="updateProgress(3)"> Estabelecer uma relação entre duas tabelas<br>
+      <input type="radio" name="q3" value="b" onclick="updateProgress(3)"> Armazenar dados temporários<br>
+      <input type="radio" name="q3" value="c" onclick="updateProgress(3)"> Indexar dados para buscas rápidas<br>
+      <input type="radio" name="q3" value="d" onclick="updateProgress(3)"> Definir o tipo de dado das colunas
+    </div>
+    
+    <div class="question">
+      <label for="q4">4. Qual é a principal diferença entre INNER JOIN e LEFT JOIN?</label>
+      <input type="radio" name="q4" value="a" onclick="updateProgress(4)"> INNER JOIN retorna todos os registros, enquanto LEFT JOIN retorna apenas registros coincidentes<br>
+      <input type="radio" name="q4" value="b" onclick="updateProgress(4)"> INNER JOIN retorna apenas registros coincidentes, enquanto LEFT JOIN retorna todos os registros<br>
+      <input type="radio" name="q4" value="c" onclick="updateProgress(4)"> INNER JOIN é mais rápido que LEFT JOIN<br>
+      <input type="radio" name="q4" value="d" onclick="updateProgress(4)"> INNER JOIN é mais seguro que LEFT JOIN
+    </div>
+    
+    <div class="question">
+      <label for="q5">5. Qual é o propósito de uma chave estrangeira em uma tabela de banco de dados?</label>
+      <input type="radio" name="q5" value="a" onclick="updateProgress(5)"> Estabelecer uma relação entre duas tabelas<br>
+      <input type="radio" name="q5" value="b" onclick="updateProgress(5)"> Armazenar dados temporários<br>
+      <input type="radio" name="q5" value="c" onclick="updateProgress(5)"> Indexar dados para buscas rápidas<br>
+      <input type="radio" name="q5" value="d" onclick="updateProgress(5)"> Definir o tipo de dado das colunas
+    </div>
+    
+    <button type="submit" onclick="showResult(); this.disabled = true;">Enviar Respostas</button>
+  </form>
+  
+  <div class="result" id="result"></div>
+  
+  <script>
+    let correctAnswers = 0;
+    
+    function updateProgress(questionNumber) {
+      const progressBar = document.getElementById('progress-bar');
+      const progress = (questionNumber / 5) * 100;
+      progressBar.style.width = `${progress}%`;
+      progressBar.style.opacity = 1;  
+      progressBar.textContent = `${progress}%`;
+    }
+    
+    function showResult() {
+      const questions = document.querySelectorAll('.question');
+      questions.forEach((question, index) => {
+        const correctAnswer = question.querySelector(`input[value="${getCorrectAnswer(index + 1)}"]`);
+        if (correctAnswer.checked) {
+          correctAnswers++;
+        }
+      });
+      
+      const resultDiv = document.getElementById('result');
+      if (correctAnswers >= 4) { // Aprovado se acertar 80% das questões (4 de 5)
+        resultDiv.textContent = 'Aprovado! Você acertou ' + correctAnswers + ' de 5 questões.';
+        resultDiv.style.color = 'green';
+      } else {
+        resultDiv.textContent = 'Reprovado. Você acertou ' + correctAnswers + ' de 5 questões.';
+        resultDiv.style.color = 'red';
+      }
+      
+      const progressBar = document.getElementById('progress-bar');
+      progressBar.style.opacity = 0;
+    }
+    
+    function getCorrectAnswer(questionNumber) {
+      switch (questionNumber) {
+        case 1:
+          return 'b';
+        case 2:
+          return 'b';
+        case 3:
+          return 'a';
+        case 4:
+          return 'b';
+        case 5:
+          return 'a';
+        default:
+          return '';
+      }
+    }
+  </script>
+</body>
+</html>
