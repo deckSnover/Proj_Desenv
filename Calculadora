@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Calc_igor-hilario</title>
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #000; /* Fundo geral preto */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+.container {
+  width: 300px;
+  text-align: center;
+  background: #333; /* Fundo da calculadora grafite */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+header {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff; /* Cor do texto do cabeçalho */
+}
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  box-sizing: border-box;
+  text-align: right;
+  border-radius: 5px;
+}
+.button {
+  width: 60px;
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  background-color: #000;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.button:hover {
+  background-color: #333;
+}
+.orange {
+  background-color: #FFA500;
+}
+.green {
+  background-color: #4CAF50;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <header>Calc_igor-hilario</header>
+  <input type="text" id="display" value="" readonly>
+  <br>
+  <button class="button orange" onclick="clearDisplay()">C</button>
+  <button class="button orange" onclick="backspace()">←</button>
+  <button class="button" onclick="appendOperator('/')">÷</button>
+  <button class="button" onclick="appendOperator('*')">x</button>
+  <br>
+  <button class="button" onclick="appendNumber('7')">7</button>
+  <button class="button" onclick="appendNumber('8')">8</button>
+  <button class="button" onclick="appendNumber('9')">9</button>
+  <button class="button" onclick="appendOperator('-')">-</button>
+  <br>
+  <button class="button" onclick="appendNumber('4')">4</button>
+  <button class="button" onclick="appendNumber('5')">5</button>
+  <button class="button" onclick="appendNumber('6')">6</button>
+  <button class="button" onclick="appendOperator('+')">+</button>
+  <br>
+  <button class="button" onclick="appendNumber('1')">1</button>
+  <button class="button" onclick="appendNumber('2')">2</button>
+  <button class="button" onclick="appendNumber('3')">3</button>
+  <button class="button green" onclick="calculate()">=</button>
+  <br>
+  <button class="button" onclick="appendNumber('0')">0</button>
+  <button class="button" onclick="appendNumber('.')">.</button>
+  <button class="button" onclick="appendOperator('√')">√</button>
+  <button class="button" onclick="appendOperator('^')">^</button>
+</div>
+
+<script>
+let display = document.getElementById('display');
+let operator = null;
+let operand1 = null;
+
+function appendNumber(num) {
+  display.value += num;
+}
+
+function appendOperator(op) {
+  if (operator) {
+    calculate();
+  }
+  operand1 = parseFloat(display.value);
+  operator = op;
+  display.value = '';
+}
+
+function calculate() {
+  let operand2 = parseFloat(display.value);
+  let result;
+  switch (operator) {
+    case '+':
+      result = operand1 + operand2;
+      break;
+    case '-':
+      result = operand1 - operand2;
+      break;
+    case '*':
+      result = operand1 * operand2;
+      break;
+    case '/':
+      result = operand1 / operand2;
+      break;
+    case '√':
+      result = Math.sqrt(operand1);
+      break;
+    case '^':
+      result = Math.pow(operand1, operand2);
+      break;
+  }
+  display.value = result;
+  operator = null;
+  operand1 = null;
+}
+
+function clearDisplay() {
+  display.value = '';
+}
+
+function backspace() {
+  display.value = display.value.slice(0, -1);
+}
+</script>
+</body>
+</html>
