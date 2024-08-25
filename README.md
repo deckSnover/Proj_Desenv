@@ -184,5 +184,3 @@ loadNextQuestion();
 4. **Suporte**: Fornecer documentação e suporte para futuras atualizações e melhorias.
 
 ---
-
-Se precisar de mais detalhes ou ajustes, é só me avisar!
